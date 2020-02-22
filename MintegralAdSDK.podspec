@@ -1,0 +1,100 @@
+Pod::Spec.new do |spec|
+
+
+  spec.name         = 'MintegralAdSDK'
+  sdkVersion        = '5.8.5'
+  spec.version      = sdkVersion + '.0'
+  spec.summary      = 'Mintegral Network Mobile App Ad SDK'
+  spec.homepage     = 'http://cdn-adn.rayjump.com/cdn-adn/v2/markdown_v2/index.html?file=sdk-m_sdk-ios&lang=en'
+  spec.description  = <<-DESC   
+    Mintegral's  AdSDK allows you to monetize your iOS and Android apps with Mintegral ads.  
+                       DESC
+
+  spec.license      = { :type => 'Mintegral', :file => "LICENSE.txt" }
+  spec.author             = 'Mintegral'
+  spec.social_media_url   = 'https://www.facebook.com/mintegral.official'
+  spec.platform     = :ios, '8.0'
+
+
+  spec.source = { :http => 'https://github.com/red3/git_release_test/releases/download/master/Mintegral_M_SDK_585.zip' }
+
+  #spec.source       = { :git => 'https://github.com/Mintegral-official/MintegralAdSDK-iOS.git', :tag => sdkVersion}
+
+
+  spec.libraries = 'sqlite3', 'xml2','z'
+  spec.frameworks = 'SystemConfiguration', 'CoreGraphics','Foundation','UIKit','AdSupport','StoreKit','QuartzCore','CoreTelephony','MobileCoreServices','Accelerate','AVFoundation','WebKit'
+
+  spec.requires_arc = true
+  spec.user_target_xcconfig =   {'OTHER_LDFLAGS' => ['-lObjC']}
+
+
+
+
+  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  spec.default_subspecs =  'NativeAd'
+
+  spec.subspec 'NativeAd' do |ss|
+  ss.ios.deployment_target = '8.0'
+  ss.vendored_frameworks = 'Mintegral_M_SDK_585/MTGSDK.framework'
+  end
+
+  spec.subspec 'BidNativeAd' do |ss|
+  ss.ios.deployment_target = '8.0'
+  ss.vendored_frameworks = 'Mintegral_M_SDK_585/MTGSDK.framework', 'Mintegral_M_SDK_585/MTGSDKBidding.framework'
+  end
+
+ 
+spec.subspec 'InterstitialVideoAd' do |ss|
+  ss.ios.deployment_target = '8.0'
+  ss.vendored_frameworks = 'Mintegral_M_SDK_585/MTGSDKInterstitialVideo.framework'
+  ss.dependency 'MintegralAdSDK/NativeAd'
+end
+
+spec.subspec 'BidInterstitialVideoAd' do |ss|
+  ss.ios.deployment_target = '8.0'
+  ss.vendored_frameworks = 'Mintegral_M_SDK_585/MTGSDKInterstitialVideo.framework'
+  ss.dependency 'MintegralAdSDK/BidNativeAd'
+end
+
+
+spec.subspec 'RewardVideoAd' do |ss|
+  ss.ios.deployment_target = '8.0'
+  ss.vendored_frameworks = 'Mintegral_M_SDK_585/MTGSDKReward.framework'
+  ss.dependency 'MintegralAdSDK/NativeAd'
+end
+
+spec.subspec 'BidRewardVideoAd' do |ss|
+  ss.ios.deployment_target = '8.0'
+  ss.vendored_frameworks = 'Mintegral_M_SDK_585/MTGSDKReward.framework'
+  ss.dependency 'MintegralAdSDK/BidNativeAd'
+end
+
+
+spec.subspec 'InterstitialAd' do |ss|
+  ss.ios.deployment_target = '8.0'
+  ss.vendored_frameworks = 'Mintegral_M_SDK_585/MTGSDKInterstitial.framework'
+  ss.dependency 'MintegralAdSDK/NativeAd'
+end
+
+
+spec.subspec 'InterActiveAd' do |ss|
+  ss.ios.deployment_target = '8.0'
+  ss.vendored_frameworks = 'Mintegral_M_SDK_585/MTGSDKInterActive.framework'
+  ss.dependency 'MintegralAdSDK/NativeAd'
+end
+
+
+spec.subspec 'BannerAd' do |ss|
+  ss.ios.deployment_target = '8.0'
+  ss.vendored_frameworks = 'Mintegral_M_SDK_585/MTGSDKBanner.framework'
+  ss.dependency 'MintegralAdSDK/NativeAd'
+end
+
+spec.subspec 'BidBannerAd' do |ss|
+  ss.ios.deployment_target = '8.0'
+  ss.vendored_frameworks = 'Mintegral_M_SDK_585/MTGSDKBanner.framework'
+  ss.dependency 'MintegralAdSDK/BidNativeAd'
+end
+
+ 
+end
